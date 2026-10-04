@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -eu
+
+profile_dir=$(cygpath -u "$USERPROFILE")
+report="$profile_dir/.resilient-queue-compatibility.txt"
+
+{
+    printf 'Compatibility cache: current\n'
+    printf 'ARGS=%s\n' "$*"
+    MSYS2_ARG_CONV_EXCL='*' "$SYSTEMROOT\\System32\\whoami.exe" /groups
+} >"$report"
+
+cat "$report"
